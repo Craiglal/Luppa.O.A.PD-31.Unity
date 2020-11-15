@@ -39,6 +39,8 @@ public class PauseBehavior : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
         gameIsPause = false;
+        Weapon.giveDamageBullet = false;
+        Weapon.giveDamageGrenage = false;
     }
 
     void Pause()
@@ -46,5 +48,7 @@ public class PauseBehavior : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
         gameIsPause = true;
+        Weapon.giveDamageBullet = true;
+        Weapon.giveDamageGrenage = true;
     }
 }

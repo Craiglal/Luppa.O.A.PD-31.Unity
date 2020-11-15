@@ -15,10 +15,10 @@ public class Weapon : MonoBehaviour
     public int grenages = 3;
     float damageTickTimeBullet = 1.0f;
     float damageTickCooldownBullet = 0.0f;
-    bool giveDamageBullet = false;
+    public static bool giveDamageBullet = false;
     float damageTickTimeGrenage = 2.0f;
     float damageTickCooldownGrenage = 0.0f;
-    bool giveDamageGrenage = false;
+    public static bool giveDamageGrenage = false;
 
     public GameObject grenadeUI;
     public GameObject bulletUI;
@@ -38,62 +38,60 @@ public class Weapon : MonoBehaviour
     }
     void Update()
     {
-        if(Time.timeScale != 1){
-            if (animator.GetBool("isCrouching") && Input.GetButtonDown("Fire1"))
-            {
-                CrouchShoot();
-            }
-            else if (Input.GetButtonDown("Fire1"))
-            {
-                Shoot();
-            }
-
-            if (animator.GetBool("isCrouching") && Input.GetButtonDown("Fire2"))
-            {
-                CrouchGrenade();
-            }
-            else if (Input.GetButtonDown("Fire2"))
-            {
-                Grenade();
-            }
-
-            if (giveDamageBullet)
-            {
-                if (damageTickCooldownBullet == 0.0f)
-                {
-                    damageTickCooldownBullet = damageTickTimeBullet;
-                }
-                else if (damageTickCooldownBullet < 0.0f)
-                {
-                    giveDamageBullet = false;
-                    damageTickCooldownBullet = 0.0f;
-                }
-                else
-                {
-                    damageTickCooldownBullet -= Time.deltaTime;
-                }
-            }
-
-            if (giveDamageGrenage)
-            {
-                if (damageTickCooldownGrenage == 0.0f)
-                {
-                    damageTickCooldownGrenage = damageTickTimeGrenage;
-                }
-                else if (damageTickCooldownGrenage < 0.0f)
-                {
-                    giveDamageGrenage = false;
-                    damageTickCooldownGrenage = 0.0f;
-                }
-                else
-                {
-                    damageTickCooldownGrenage -= Time.deltaTime;
-                }
-            }
-
-            grenadeUI.GetComponent<TextMeshProUGUI>().text = grenages.ToString();
-            bulletUI.GetComponent<TextMeshProUGUI>().text = bullets.ToString();
+        if (animator.GetBool("isCrouching") && Input.GetButtonDown("Fire1"))
+        {
+            CrouchShoot();
         }
+        else if (Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
+
+        if (animator.GetBool("isCrouching") && Input.GetButtonDown("Fire2"))
+        {
+            CrouchGrenade();
+        }
+        else if (Input.GetButtonDown("Fire2"))
+        {
+            Grenade();
+        }
+
+        if (giveDamageBullet)
+        {
+            if (damageTickCooldownBullet == 0.0f)
+            {
+                damageTickCooldownBullet = damageTickTimeBullet;
+            }
+            else if (damageTickCooldownBullet < 0.0f)
+            {
+                giveDamageBullet = false;
+                damageTickCooldownBullet = 0.0f;
+            }
+            else
+            {
+                damageTickCooldownBullet -= Time.deltaTime;
+            }
+        }
+
+        if (giveDamageGrenage)
+        {
+            if (damageTickCooldownGrenage == 0.0f)
+            {
+                damageTickCooldownGrenage = damageTickTimeGrenage;
+            }
+            else if (damageTickCooldownGrenage < 0.0f)
+            {
+                giveDamageGrenage = false;
+                damageTickCooldownGrenage = 0.0f;
+            }
+            else
+            {
+                damageTickCooldownGrenage -= Time.deltaTime;
+            }
+        }
+
+        grenadeUI.GetComponent<TextMeshProUGUI>().text = grenages.ToString();
+        bulletUI.GetComponent<TextMeshProUGUI>().text = bullets.ToString();
     }
 
     void Shoot()
