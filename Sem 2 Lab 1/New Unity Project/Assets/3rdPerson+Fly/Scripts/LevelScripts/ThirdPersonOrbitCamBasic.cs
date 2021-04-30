@@ -26,6 +26,9 @@ public class ThirdPersonOrbitCamBasic : MonoBehaviour
 	private float targetMaxVerticalAngle;                              // Custom camera max vertical clamp angle.
 	private bool isCustomOffset;                                       // Boolean to determine whether or not a custom camera offset is being used.
 
+
+	public GameObject inventoryUi;
+
 	// Get the camera horizontal angle.
 	public float GetH { get { return angleH; } }
 
@@ -56,6 +59,10 @@ public class ThirdPersonOrbitCamBasic : MonoBehaviour
 
 	void Update()
 	{
+        if (inventoryUi.activeSelf)
+        {
+			return;
+        }
 		// Get mouse movement to orbit the camera.
 		// Mouse:
 		angleH += Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1) * horizontalAimingSpeed;

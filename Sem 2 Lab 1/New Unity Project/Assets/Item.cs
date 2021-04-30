@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public ItemScriptable item;
+	private void OnTriggerEnter(Collider collision)
+	{
+		Player pl = collision.GetComponent<Player>();
+		if (pl != null)
+		{
+			Inventory.instance.Add(item);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+            Destroy(gameObject);
+		}
+	}
 }
+
